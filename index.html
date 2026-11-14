@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0f16">
+  <meta name="color-scheme" content="dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="RadMCQ">
+  <meta name="description" content="Interactive radiology MCQ practice across CNS, chest, abdomen, MSK, GU and physics, with explanations and local progress tracking.">
+  <title>Radiology MCQ Trainer</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1c26'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%232dd4bf' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%2338bdf8'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#0f1c26"/>
+        <circle cx="32" cy="32" r="18" fill="none" stroke="#2dd4bf" stroke-width="5"/>
+        <circle cx="32" cy="32" r="6" fill="#38bdf8"/>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-name">Radiology MCQ</span>
+        <span class="brand-sub"><span id="q-total">0</span> questions · 6 topics</span>
+      </div>
+    </div>
+    <nav class="tabs" aria-label="Main">
+      <button type="button" class="tab" data-view="quiz">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 9a3 3 0 1 1 4 2.8c-.6.3-1 .9-1 1.5V14M12 17.5v.5"/><circle cx="12" cy="12" r="9.5"/></svg>
+        <span>Quiz</span>
+      </button>
+      <button type="button" class="tab" data-view="dashboard">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+        <span>Dashboard</span>
+      </button>
+      <button type="button" class="tab" data-view="favorites">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg>
+        <span>Favorites</span>
+      </button>
+      <button type="button" class="tab" data-view="history">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v5l3.5 2"/></svg>
+        <span>History</span>
+      </button>
+    </nav>
+  </header>
+
+  <div id="storage-warning" class="banner" role="status" hidden>
+    Browser storage is unavailable (for example in private browsing), so progress will not be saved.
+  </div>
+
+  <main id="main">
+    <section id="view-quiz" class="view" aria-label="Quiz">
+      <div class="quiz-layout">
+        <div class="quiz-col">
+          <div class="card filters">
+            <div class="filter-group">
+              <span class="filter-label" id="topics-label">Topics</span>
+              <div class="chips" id="topic-chips" role="group" aria-labelledby="topics-label"></div>
+            </div>
+            <div class="filter-group filter-row">
+              <div class="seg" id="mode-seg" role="group" aria-label="Question set"></div>
+              <label class="switch">
+                <input type="checkbox" id="shuffle-toggle">
+                <span class="switch-track" aria-hidden="true"></span>
+                <span>Shuffle</span>
+              </label>
+            </div>
+          </div>
+          <article id="question-card" class="card question-card" aria-live="off"></article>
+        </div>
+        <aside class="side-col">
+          <div class="card" id="session-panel"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="view-dashboard" class="view" aria-label="Dashboard" hidden>
+      <h1 class="view-title">Dashboard</h1>
+      <div id="dashboard-body"></div>
+    </section>
+
+    <section id="view-favorites" class="view" aria-label="Favorites" hidden>
+      <h1 class="view-title">Favorites</h1>
+      <div id="favorites-body"></div>
+    </section>
+
+    <section id="view-history" class="view" aria-label="History" hidden>
+      <h1 class="view-title">History</h1>
+      <div id="history-body"></div>
+    </section>
+
+    <footer class="disclaimer">
+      Original educational questions for exam revision. Please check content against current guidelines and
+      standard texts; not intended for clinical decision-making. Progress is stored only in this browser.
+    </footer>
+  </main>
+
+  <input type="file" id="import-file" accept="application/json,.json" class="visually-hidden" tabindex="-1">
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="js/questions.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
